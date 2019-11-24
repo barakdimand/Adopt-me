@@ -1,0 +1,27 @@
+{
+  "name": "Adopt-me",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier \"src/**/*.{js,html}\" --write",
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barakdimand/Adopt-me.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/barakdimand/Adopt-me/issues"
+  },
+  "homepage": "https://github.com/barakdimand/Adopt-me#readme",
+  "devDependencies": {
+    "eslint": "^6.7.0",
+    "eslint-config-prettier": "^6.7.0",
+    "prettier": "^1.19.1"
+  }
+}
