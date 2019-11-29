@@ -1,10 +1,23 @@
-import React, { useState } from "react";
-import { ANIMALS } from "@frontendmasters/pet";
+import React, { useState, useEffect } from "react";
+import pet, { ANIMALS } from "@frontendmasters/pet";
+import useDropdown from "./useDropdown";
 // ANIMALS is an array of strings
 
 const SearchParams = () => {
-  const [location, setLocation] = useState("Sherman Oaks, CA");
-  const [animal, setAnimal] = useState("dog");
+  const [location, setLocation] = useState("Seattle, WA");
+  const [breeds, setBreeds] = useState([]);
+  const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS);
+  const [breed, BreedDropdow, setBreed] = useDropdown("Breed", "", breeds);
+
+  useEffect(() => {
+    setBreeds([]);
+    setBreed("");
+
+    pet.breeds(animal).then(({ breeds }) => {
+      const breedStrings = breeds.map(breedObj => breedObj.name);
+      setBreeds(breedStrings);
+    }, console.error);
+  }, [animal, setBreeds, setBreed]);
 
   return (
     <div className="search-params">
@@ -18,7 +31,19 @@ const SearchParams = () => {
             onChange={e => setLocation(e.target.value)}
           />
         </label>
-        <label htmlFor="animal">
+        <AnimalDropdown />
+        <BreedDropdow />
+
+        <button>Submit</button>
+      </form>
+    </div>
+  );
+};
+
+export default SearchParams;
+
+{
+  /* <label htmlFor="animal">
           Animal
           <select
             id="animal"
@@ -34,10 +59,21 @@ const SearchParams = () => {
             ))}
           </select>
         </label>
-        <button>Submit</button>
-      </form>
-    </div>
-  );
-};
-
-export default SearchParams;
+        <label htmlFor="breed">
+          Breed
+          <select
+            id="breed"
+            value={breed}
+            onChange={e => setBreed(e.target.value)}
+            onBlur={e => setBreed(e.target.value)}
+            disabled={breeds.length === 0}
+          >
+            <option>All</option>
+            {breeds.map(breedString => (
+              <option key={breedString} value={breedString}>
+                {breedString}
+              </option>
+            ))}
+          </select>
+        </label> */
+}
